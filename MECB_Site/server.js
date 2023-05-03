@@ -17,7 +17,7 @@ var fileExtensions = {
 var con = mysql.createConnection({
     host: "sql.wpc-is.online",
     user: "hhakopi1",
-    password: "hhak0533",
+    password: "*",
     database: "db_test_hhakopi1"
 });
 con.connect();
