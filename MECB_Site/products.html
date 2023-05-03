@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+  
+  <head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Macy's European Coffeehouse & Bakery Menus</title>
+  <link href="products.css" rel="stylesheet" type="text/css">
+</head>
+
+  <body>
+
+    <ul>
+		<li><a href="homePage.html">Home Page</a></li>
+		<li><a href="contactPage.html">Contact Us</a></li>
+		<li><a href="products.html">Our menu</a></li>
+	</ul>
+    
+
+
+<script>
+function calculateTotal() {
+  // Retrieve the selected product's ID and cost
+  const productSelect = document.getElementById('product-select');
+  const productId = parseInt(productSelect.value);
+  let productCost = 0;
+
+  // Determine the product's cost based on its ID
+  switch(productId) {
+    case 1:
+      productCost = 3.59;
+      break;
+    case 2:
+      productCost = 4.99;
+      break;
+    case 3:
+      productCost = 9.59;
+      break;
+    case 4:
+      productCost = 8.99;
+      break;
+    case 5:
+      productCost = 8.99;
+      break;
+    case 6:
+      productCost = 13.99;
+      break;
+    // Add code to handle unrecognized product ID
+  }
+
+  
+  const taxRate = 0.07;
+  const totalCost = productCost * (1 + taxRate) * parseInt(document.getElementById('quantity').value);
+
+  
+  const totalCostElement = document.getElementById('total-cost');
+  totalCostElement.innerText = 'Total cost after tax is: $' + totalCost.toFixed(2);
+
+  $("#cost").append("<div> Cost = $ " + sum.toFixed(2) + " After 10% tax </div>")
+
+}
+</script>
+
+
+<center><div id="result"></div>
+
+
+  <main>
+    <h1>Our Products</h1>
+<button onclick="getProducts();">Show me the products </button>
+<button onclick="calculateCost();">What's the cost? </button>
+<br><br>
+<div id="products">
+  <table  border="1">
+  <tr>
+    <th width=200px>Product Name   </th>
+    <th width=50px>Price</th>
+    <th width=170px>Quantity</th>
+  </tr>
+</table>
+<table  id="prd" border="1">
+  
+</table>
+</div></center>
+
+  </main>
+
+<script src=https://code.jquery.com/jquery-3.6.4.min.js> </script>
+<script>
+var products;
+  
+function getProducts(){
+
+$.get("?tableName=Products_Project", function(productTable){
+
+  console.log(productTable);
+  $("#prd").empty();
+  products = JSON.parse(productTable);
+  products.forEach(function(product) {
+
+    $("#prd").append("<tr><td width=200px>" + product.prod_name + "</td><td width=50px>" + product.prod_price + "</td><td width=170px><input type='number' id="+ product.prod_id +"> </td></tr>");
+
+
+
+  }); 
+
+$("#products").append("<div id='cost> </div>")
+
+}); 
+
+} 
+
+function calculateCost(){
+
+  var sum=0;
+  if (products) {
+    
+      products.forEach(function(product){
+
+      sum = sum + product.prod_price * $("#" + product.prod_id).val();
+
+    });
+
+    sum = sum * 1.1; 
+    console.log(sum)
+    const totalCostElement = document.getElementById('total-cost');
+    totalCostElement.innerText = 'Total cost after tax is: $' + sum.toFixed(2);
+
+  }
+
+
+} 
+
+</script>
+
+
+<script>
+  const productCost = {
+    cheeseCake: 3.59,
+    coffee: 4.99,
+    sandwichNSalad: 9.59,
+    sandwichNCarrot: 8.99,
+    veggieBurger: 8.99,
+    sandwichNChips: 13.99
+  };
+  
+  const taxRate = 0.07;
+  const shippingRate = 0.01;
+  
+</script>
+    
+    <link href="products.css" rel="stylesheet" type="text/css">
+
+
+<center><h2><div id="total-cost"></div></h2></center>
+<h2 class="productNames">Cheesecake</h2>
+    <div class="container">
+      <div class="image">
+    <img id="cheeseCake" src="productPictures/cheeseCake.jpeg" alt="Our Classic Cheesecake">
+      </div>
+      <div class="text">
+    <p>A delicious classic cheesecake made with cream cheese, graham cracker crust and topped with fresh fruits.</p>
+    <p>$3.59</p>
+      </div>
+    </div>
+
+
+    <h2 class="productNames">Coffee</h2>
+    <div class="container">
+      <div class="image">
+    <img id="coffee" src="productPictures/Coffee.jpeg" alt=" Our European Coffee">
+      </div>
+      <div class="text">
+    <p>A freshly brewed coffee made from the finest European coffee beans. Served hot or iced.</p>
+    <p>$4.99</p>
+      </div>
+    </div>
+
+    <h2 class="productNames">Sandwich & salad</h2>
+    <div class="container">
+      <div class="image">
+    <img id="sandwichSalad" src="productPictures/sandwichSalad.jpeg" alt="Our Sandwich and Salad">
+      </div>
+      <div class="text">
+    <p>A mouth-watering combination of a grilled sandwich and a freshly made salad.</p>
+    <p>$9.59</p>
+      </div>
+    </div>
+
+    <h2 class="productNames">Sandwich & carrots</h2>
+    <div class="container">
+      <div class="image">
+    <img id="sandwichCarrots" src="productPictures/sandwichCarrots.jpeg" alt="Our Sandwich and Carrots">
+      </div>
+      <div class="text">
+    <p>A healthy and delicious sandwich made with fresh veggies, including carrots, and your choice of bread.</p>
+    <p>$8.99</p>
+      </div>
+    </div>
+
+    <h2 class="productNames">Veggie Burger</h2>
+    <div class="container">
+      <div class="image">
+    <img id="veggieBurger" src="productPictures/veggieBurger.jpeg" alt="Our Veggie Burger">
+      </div>
+      <div class="text">
+    <p>A vegetarian delight, our veggie burger is made with fresh veggies and served on a freshly baked bun.</p>
+    <p>$8.99</p>
+      </div>
+    </div>
+
+     <h2 class="productNames">Waffle and Fruits</h2>
+    <div class="container">
+      <div class="image">
+    <img id="waffleFruit" src="productPictures/waffleFruit.jpeg" alt="Our Waffle and Fruits">
+      </div>
+      <div class="text">
+    <p>A classic combo of a delicious Fruits and Waffles.</p>
+    <p>$13.99</p>
+      </div>
+    </div>
+
+
+
+    <h1>Made From The Freshest Of Ground Coffee Beans!</h1>
+    <p>Copyright © Macy's European Coffeehouse & Bakery © </p>
+
+    
+  </body>
+
+
+  
+</html>
+
